@@ -1,0 +1,5 @@
+<form [formGroup]="editorForm">
+    <div class="form-group">
+            <quill-editor [styles]="{'min-height': '120px'}" [modules]="config" formControlName="editor" (onContentChanged)="sendContent()"></quill-editor>
+    </div>
+</form>

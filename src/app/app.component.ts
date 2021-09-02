@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'angular-editor';
+
+  editorContent: string;
+  secretContent: string;
+
+  constructor() {
+  }
+
+  ngOnInit(): void {
+  }
+
+  receiveContent($event: string) {
+    this.secretContent = $event;
+  }
+
+  printContent($event: any): void {
+    console.log(this.secretContent);
+    this.editorContent = this.secretContent;
+  }
 }

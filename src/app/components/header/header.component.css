@@ -1,0 +1,17 @@
+.toolbar {
+    background-color: black;
+    margin-top:0;
+    text-align: center;
+    padding: 1.5em;
+}
+
+.icon {
+    margin: 1em;
+    vertical-align: middle;
+    color: gold;
+    font-size: 2.5em;
+}
+
+.icon:hover {
+    color:lightyellow;
+}
