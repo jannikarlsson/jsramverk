@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,28 +8,21 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class EditorComponent implements OnInit {
 
+  @Input() singleContent: string;
+  @Input() singleTitle: string;
   @Output() saveEvent = new EventEmitter();
+  @Output() saveTitle = new EventEmitter();
 
   editorContent: string = "";
+  editorTitle: string = "";
   editorForm: FormGroup;
 
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
-      // ['blockquote', 'code-block'],
       ['code-block'],
-      // [{ 'header': 1 }, { 'header': 2 }],
       [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      // [{ 'script': 'sub'}, { 'script': 'super' }],
-      // [{ 'indent': '-1'}, { 'indent': '+1' }],
-      // [{ 'direction': 'rtl' }],
-      // [{ 'size': ['small', false, 'large', 'huge'] }],
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-      // [{ 'color': [] }, { 'background': [] }],
-      // [{ 'font': [] }],
-      // [{ 'align': [] }],
-      // ['clean'],
-      // ['link', 'image', 'video']
       ['link']
     ]
   }
@@ -38,13 +31,21 @@ export class EditorComponent implements OnInit {
 
   ngOnInit(): void {
     this.editorForm = new FormGroup({
-      'editor': new FormControl(null)
+      'editor': new FormControl(null),
+      'title': new FormControl(null)
     })
+    this.singleContent;
+    this.singleTitle;
   }
 
   sendContent() {
     this.editorContent = this.editorForm.get('editor').value;
     this.saveEvent.emit(this.editorContent);
+  }
+
+  sendTitle() {
+    this.editorTitle = this.editorForm.get('title').value;
+    this.saveTitle.emit(this.editorTitle);
   }
 
 }

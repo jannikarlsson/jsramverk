@@ -1,3 +1,3 @@
-<app-header (buttonClick)="printContent($event)"></app-header>
-<app-editor (saveEvent)="receiveContent($event)"></app-editor>
-<app-output [editorContent]="editorContent"></app-output>
+<app-header (buttonClick)="printContent($event)" (buttonClear)="clearForm($event)"></app-header>
+<app-editor [singleContent]="singleContent" [singleTitle]="singleTitle" (saveEvent)="receiveContent($event)" (saveTitle)="receiveTitle($event)"></app-editor>
+<app-output [editorContent]="editorContent" (linkClick)="openOne($event)"></app-output>
