@@ -2,4 +2,22 @@
     margin: 2em;
     background: rgb(241, 218, 116);
     padding: 2em;
+    font-family: sans-serif;
+}
+
+h2 {
+    padding-bottom: 0.5em;
+}
+
+p {
+    line-height: 150%;
+}
+
+p::before {
+    content: "🗎 "
+}
+
+p:hover {
+    color: grey;
+    cursor: pointer;
 }

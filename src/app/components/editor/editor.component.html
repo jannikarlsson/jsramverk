@@ -1,8 +1,8 @@
 <form [formGroup]="editorForm">
     <div class="form-group">
-        <label>Title:</label>
-        <input type="text" value={{singleTitle}} formControlName="title" (input)="sendTitle()">
-        <label>Content:</label>
+        <label>Titel:</label>
+        <input type="text" value={{singleTitle}} formControlName="title" (input)="sendTitle()" required>
+        <label>Innehåll:</label>
         <quill-editor [styles]="{'min-height': '120px'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (onContentChanged)="sendContent()"></quill-editor>
     </div>
 </form>

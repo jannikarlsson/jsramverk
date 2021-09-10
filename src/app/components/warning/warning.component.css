@@ -1,0 +1,10 @@
+.warning {
+    margin: 2em;
+    background: rgb(202, 163, 130);
+    padding: 2em;
+    font-family: sans-serif;
+}
+
+.warning:empty {
+    display: none;
+}

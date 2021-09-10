@@ -10,6 +10,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HeaderComponent } from './components/header/header.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { OutputComponent } from './components/output/output.component';
+import { WarningComponent } from './components/warning/warning.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { OutputComponent } from './components/output/output.component';
     HeaderComponent,
     EditorComponent,
     OutputComponent,
+    WarningComponent,
   ],
   imports: [
     BrowserModule,

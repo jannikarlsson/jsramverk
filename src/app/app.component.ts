@@ -17,11 +17,13 @@ export class AppComponent {
   singleContent: string;
   singleTitle: string;
   singleId: string;
+  msg: string;
 
   constructor(private docsService: DocsService) {
   }
 
   ngOnInit(): void {
+    this.msg = "";
   }
 
   receiveContent($event: string) {
@@ -37,20 +39,24 @@ export class AppComponent {
       .subscribe((data) => {
         this.singleContent = data[0].content;
         this.singleTitle = data[0].title;
+        this.secretTitle = this.singleTitle;
+        this.secretContent = this.singleContent;
         this.singleId = data[0]._id;
-        console.log(this.singleContent);
-        console.log(this.singleTitle);
-        console.log(this.singleId);
       });
   }
 
   printContent($event: any): void {
-    if (this.singleId) {
-      let title = this.secretTitle ? this.secretTitle : this.singleTitle;
-      this.docsService.updateDoc(this.singleId, {title: title, content: this.secretContent});
+    if (this.singleId && this.secretTitle) {
+      // let title = this.secretTitle ? this.secretTitle : this.singleTitle;
+      this.docsService.updateDoc(this.singleId, {title: this.secretTitle, content: this.secretContent});
+      this.msg = "";
+    } else if (this.secretTitle) {
+      // let title = this.secretTitle ? this.secretTitle : this.singleTitle;
+      this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent})
+      this.msg = "";
     } else {
-      let title = this.secretTitle ? this.secretTitle : this.singleTitle;
-      this.docsService.sendDocs({title: title, content: this.secretContent})
+      console.log("No title")
+      this.msg = "Du måste ge dokumentet ett namn för att kunna spara.";
     }
   }
 
@@ -58,5 +64,8 @@ export class AppComponent {
     this.singleContent = "";
     this.singleTitle = "";
     this.singleId = "";
+    this.secretContent = "";
+    this.secretTitle = "";
+    this.msg = "";
   }
 }
