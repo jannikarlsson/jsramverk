@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { OutputComponent } from './output.component';
 
 describe('OutputComponent', () => {
@@ -8,7 +8,8 @@ describe('OutputComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OutputComponent ]
+      declarations: [ OutputComponent ],
+      imports: [HttpClientTestingModule]
     })
     .compileComponents();
   });
@@ -21,5 +22,13 @@ describe('OutputComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have content', () => {
+    expect(component.arr).toBeTruthy();
+  });
+
+  it('content should be array', () => {
+    expect(component.arr).toEqual(jasmine.any(Array));
   });
 });

@@ -47,11 +47,9 @@ export class AppComponent {
 
   printContent($event: any): void {
     if (this.singleId && this.secretTitle) {
-      // let title = this.secretTitle ? this.secretTitle : this.singleTitle;
       this.docsService.updateDoc(this.singleId, {title: this.secretTitle, content: this.secretContent});
       this.msg = "";
     } else if (this.secretTitle) {
-      // let title = this.secretTitle ? this.secretTitle : this.singleTitle;
       this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent})
       this.msg = "";
     } else {
