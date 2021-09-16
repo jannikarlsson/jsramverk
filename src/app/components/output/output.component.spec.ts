@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { OutputComponent } from './output.component';
+import {By} from "@angular/platform-browser";
+
 
 describe('OutputComponent', () => {
   let component: OutputComponent;
@@ -31,4 +33,6 @@ describe('OutputComponent', () => {
   it('content should be array', () => {
     expect(component.arr).toEqual(jasmine.any(Array));
   });
+
+  
 });

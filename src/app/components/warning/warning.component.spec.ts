@@ -22,4 +22,8 @@ describe('WarningComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should not have content as default', () => {
+    expect(component.msg).toBeFalsy();
+  });
 });

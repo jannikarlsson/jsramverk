@@ -1,3 +1,5 @@
+[![Build Status](https://app.travis-ci.com/jannikarlsson/jsramverk.svg?branch=main)](https://app.travis-ci.com/jannikarlsson/jsramverk)
+
 # AngularEditor
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.3.

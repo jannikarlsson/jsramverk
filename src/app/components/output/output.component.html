@@ -1,5 +1,4 @@
-<!-- <div class="output" [innerHTML]="editorContent ? editorContent : 'Skriv något och klicka spara för att se det här.'"></div> -->
 <div class="output">
 <h2>Sparade dokument</h2>
-<p *ngFor="let item of arr" (click)="openDoc(item._id)">{{item.title}}</p>
+<p class="docs" *ngFor="let item of arr" (click)="openDoc(item._id)">{{item.title}}</p>
 </div>
