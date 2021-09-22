@@ -52,7 +52,6 @@ export class AppComponent {
       this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent})
       this.msg = "";
     } else {
-      console.log("No title")
       this.msg = "Du måste ge dokumentet ett namn för att kunna spara.";
     }
   }

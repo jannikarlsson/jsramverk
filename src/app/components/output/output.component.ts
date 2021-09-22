@@ -27,13 +27,14 @@ export class OutputComponent implements OnInit {
   }
 
   openDoc(id): void {
+    this.socketService.createRoom(id);
+    console.log(`room ${id} created`);
     this.linkClick.emit(id);
     this.docsService.fetchOne(id)
       .subscribe((data) => {
         this.single = data[0].content;
       });
-      this.socketService.createRoom(id);
-      console.log(`room ${id} created`);
+      
   }
 
 }

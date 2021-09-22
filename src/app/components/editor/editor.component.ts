@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SocketService } from '../../services/socket.service';
+import { DocsService } from '../../services/docs.service';
+
 
 
 @Component({
@@ -17,7 +19,6 @@ export class EditorComponent implements OnInit {
   @Output() saveEvent = new EventEmitter();
   @Output() saveTitle = new EventEmitter();
 
-  editorContent: string = "";
   editorTitle: string = "";
   editorForm: FormGroup;
   tempContent;
@@ -32,7 +33,7 @@ export class EditorComponent implements OnInit {
     ]
   }
 
-  constructor(private socketService: SocketService) { }
+  constructor(private socketService: SocketService, private docsService: DocsService) { }
 
   ngOnInit(): void {
     this.editorForm = new FormGroup({
@@ -56,6 +57,7 @@ export class EditorComponent implements OnInit {
         html: this.tempContent
       };
       this.socketService.sendText(data);
+      this.docsService.updateDoc(this.singleId, {title: this.singleTitle, content: this.tempContent});
     }
   }
 

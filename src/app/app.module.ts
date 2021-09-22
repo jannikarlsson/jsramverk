@@ -12,7 +12,8 @@ import { OutputComponent } from './components/output/output.component';
 import { WarningComponent } from './components/warning/warning.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+// const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
 
 @NgModule({
   
