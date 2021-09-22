@@ -10,8 +10,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { EditorComponent } from './components/editor/editor.component';
 import { OutputComponent } from './components/output/output.component';
 import { WarningComponent } from './components/warning/warning.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 
 @NgModule({
+  
   declarations: [
     AppComponent,
     HeaderComponent,
@@ -21,6 +25,7 @@ import { WarningComponent } from './components/warning/warning.component';
   ],
   imports: [
     BrowserModule,
+    SocketIoModule.forRoot(config),
     AppRoutingModule,
     ReactiveFormsModule,
     QuillModule.forRoot(),
@@ -31,4 +36,5 @@ import { WarningComponent } from './components/warning/warning.component';
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

@@ -1,11 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocsService } from '../../services/docs.service';
+import { SocketService } from '../../services/socket.service';
 
 @Component({
   selector: 'app-output',
   templateUrl: './output.component.html',
   styleUrls: ['./output.component.css'],
-  providers: [ DocsService ],
+  providers: [ DocsService, SocketService ],
 })
 export class OutputComponent implements OnInit {
   
@@ -16,7 +17,7 @@ export class OutputComponent implements OnInit {
   arr = [];
   single = {};
 
-  constructor(private docsService: DocsService) { }
+  constructor(private docsService: DocsService, private socketService: SocketService) { }
 
   ngOnInit(): void {
     this.docsService.fetchDocs()
@@ -30,8 +31,9 @@ export class OutputComponent implements OnInit {
     this.docsService.fetchOne(id)
       .subscribe((data) => {
         this.single = data[0].content;
-        console.log(this.single);
       });
+      this.socketService.createRoom(id);
+      console.log(`room ${id} created`);
   }
 
 }

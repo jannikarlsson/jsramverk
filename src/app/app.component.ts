@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DocsService } from './services/docs.service';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -37,11 +36,11 @@ export class AppComponent {
   openOne($event: any): void {
     this.docsService.fetchOne($event)
       .subscribe((data) => {
+        this.singleId = data[0]._id;
         this.singleContent = data[0].content;
         this.singleTitle = data[0].title;
         this.secretTitle = this.singleTitle;
         this.secretContent = this.singleContent;
-        this.singleId = data[0]._id;
       });
   }
 
