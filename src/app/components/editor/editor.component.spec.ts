@@ -1,6 +1,13 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import {By} from "@angular/platform-browser";
 import { EditorComponent } from './editor.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketService } from '../../services/socket.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+// const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
+
 
 describe('EditorComponent', () => {
   let component: EditorComponent;
@@ -8,7 +15,9 @@ describe('EditorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditorComponent ]
+      declarations: [ EditorComponent], 
+      imports: [HttpClientTestingModule, SocketIoModule.forRoot(config)],
+      providers: [ SocketService ]
     })
     .compileComponents();
   });

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Socket } from 'ngx-socket-io';
 
 export interface Docs {
   data: object;
@@ -12,7 +11,7 @@ export interface Docs {
 export class DocsService {
   errorMessage;
 
-  constructor(private http: HttpClient, private socket: Socket) { }
+  constructor(private http: HttpClient) { }
 
   fetchDocs() {
     return this.http.get<Docs>("https://jsramverk-editor-jaka19.azurewebsites.net/docs");

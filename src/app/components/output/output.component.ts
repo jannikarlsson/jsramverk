@@ -34,7 +34,5 @@ export class OutputComponent implements OnInit {
       .subscribe((data) => {
         this.single = data[0].content;
       });
-      
   }
-
 }

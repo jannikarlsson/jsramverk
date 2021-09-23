@@ -2,6 +2,11 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { OutputComponent } from './output.component';
 import {By} from "@angular/platform-browser";
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketService } from '../../services/socket.service';
+
+// const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
 
 
 describe('OutputComponent', () => {
@@ -11,7 +16,8 @@ describe('OutputComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ OutputComponent ],
-      imports: [HttpClientTestingModule]
+      imports: [HttpClientTestingModule, SocketIoModule.forRoot(config)],
+      providers: [ SocketService ]
     })
     .compileComponents();
   });

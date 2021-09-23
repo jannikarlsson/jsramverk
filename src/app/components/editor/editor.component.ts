@@ -3,8 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { SocketService } from '../../services/socket.service';
 import { DocsService } from '../../services/docs.service';
 
-
-
 @Component({
   selector: 'app-editor',
   templateUrl: './editor.component.html',
@@ -44,6 +42,7 @@ export class EditorComponent implements OnInit {
     this.socketService
       .getText()
       .subscribe((data) => {
+        this.singleContent = "";
         this.singleContent = data.html;
     });
   }

@@ -11,6 +11,7 @@ import { EditorComponent } from './components/editor/editor.component';
 import { OutputComponent } from './components/output/output.component';
 import { WarningComponent } from './components/warning/warning.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketService } from './services/socket.service';
 
 // const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
@@ -31,10 +32,12 @@ const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebs
     ReactiveFormsModule,
     QuillModule.forRoot(),
     FontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [],
+  providers: [    
+    SocketService
+  ],
   bootstrap: [AppComponent]
 })
 
