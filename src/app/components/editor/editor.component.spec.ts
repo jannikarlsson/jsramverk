@@ -34,7 +34,7 @@ describe('EditorComponent', () => {
 
   it('entering text should trigger eventemitter', () => {
     const onClickMock = spyOn(component, 'sendContent');
-    fixture.debugElement.query(By.css("quill-editor")).triggerEventHandler('onContentChanged', null);
+    fixture.debugElement.query(By.css("quill-editor")).triggerEventHandler('keyup', null);
     expect(onClickMock).toHaveBeenCalled();
   });
 
