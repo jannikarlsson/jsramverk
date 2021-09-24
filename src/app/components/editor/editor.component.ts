@@ -42,8 +42,8 @@ export class EditorComponent implements OnInit {
     this.socketService
       .getText()
       .subscribe((data) => {
-        this.singleContent = "";
         this.singleContent = data.html;
+        console.log("updated data")
     });
   }
   

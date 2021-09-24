@@ -3,6 +3,6 @@
         <label>Titel:</label>
         <input type="text" id="title" value={{singleTitle}} formControlName="title" (input)="sendTitle()" required>
         <label>Innehåll:</label>
-        <quill-editor [styles]="{'min-height': '120px'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (onContentChanged)="sendContent()"></quill-editor>
+        <quill-editor [styles]="{'min-height': '120px'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
     </div>
 </form>

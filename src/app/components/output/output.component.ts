@@ -33,6 +33,7 @@ export class OutputComponent implements OnInit {
     this.docsService.fetchOne(id)
       .subscribe((data) => {
         this.single = data[0].content;
+        console.log("från databasen")
       });
   }
 }
