@@ -1,0 +1,43 @@
+.register {
+    margin: 2em;
+    background-color: rgb(236, 141, 155);
+    padding: 1em;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+h2 {
+    font-family: sans-serif;
+}
+
+.form-group.closed {
+    margin: 0;
+    padding: 0;
+    height: 0px;
+    overflow: hidden;
+}
+
+.form-group {
+    padding: 2em;
+}
+
+label {
+    font-family: sans-serif;
+}
+
+input {
+    width: 100%;
+    min-height: 2em;
+    border: 1px solid rgb(167, 201, 228);
+    margin-bottom: 1em;
+}
+
+button {
+    width: 100%;
+    margin: 0, auto;
+    background: rgb(167, 201, 228);
+    border: 0;
+    padding: 1em;
+    cursor: pointer;
+}
+

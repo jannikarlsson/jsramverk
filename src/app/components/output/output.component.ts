@@ -11,6 +11,8 @@ import { SocketService } from '../../services/socket.service';
 export class OutputComponent implements OnInit {
   
   @Input() editorContent: string;
+  @Input() active: string;
+  @Input() token: string;
   @Output() linkClick = new EventEmitter();
 
   text = "";
@@ -20,9 +22,20 @@ export class OutputComponent implements OnInit {
   constructor(private docsService: DocsService, private socketService: SocketService) { }
 
   ngOnInit(): void {
-    this.docsService.fetchDocs()
+    this.docsService.fetchDocs(this.token)
         .subscribe((data) => {
-          this.arr = Object.values(data);
+          Object.values(data).forEach(item => {
+            if(item["permissions"]) {
+              let permissionsArr = Object.values(item["permissions"])
+              console.log(permissionsArr);
+              if (permissionsArr.includes(this.active)) {
+                this.arr.push(item)
+              }
+            }
+            
+          });
+          // this.arr = Object.values(data);
+          // console.log(this.arr);
         })
   }
 
@@ -30,7 +43,7 @@ export class OutputComponent implements OnInit {
     this.socketService.createRoom(id);
     console.log(`room ${id} created`);
     this.linkClick.emit(id);
-    this.docsService.fetchOne(id)
+    this.docsService.fetchOne(id, this.token)
       .subscribe((data) => {
         this.single = data[0].content;
         console.log("från databasen")

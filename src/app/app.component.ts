@@ -19,6 +19,9 @@ export class AppComponent {
   singleTitle: string;
   singleId: string;
   msg: string;
+  active: string;
+  token: string;
+  filePermissions: Array<string>;
 
   constructor(private docsService: DocsService) {
   }
@@ -35,8 +38,20 @@ export class AppComponent {
     this.secretTitle = $event;
   }
 
+  receivePermissions($event) {
+    this.filePermissions = $event;
+    console.log(this.filePermissions)
+  }
+
+  receiveToken(data: object) {
+    this.active = data["data"].user.username;
+    this.token = data["data"].token;
+    console.log(this.token);
+    console.log(this.active);
+  }
+
   openOne($event: any): void {
-    this.docsService.fetchOne($event)
+    this.docsService.fetchOne($event, this.token)
       .subscribe((data) => {
         this.singleId = data[0]._id;
         this.singleContent = data[0].content;
@@ -48,10 +63,10 @@ export class AppComponent {
 
   printContent($event: any): void {
     if (this.singleId && this.secretTitle) {
-      this.docsService.updateDoc(this.singleId, {title: this.secretTitle, content: this.secretContent});
+      this.docsService.updateDoc(this.singleId, {title: this.secretTitle, content: this.secretContent, permissions: this.filePermissions}, this.token);
       this.msg = "";
     } else if (this.secretTitle) {
-      this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent})
+      this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent, owner: this.active, permissions: this.filePermissions}, this.token)
       this.msg = "";
     } else {
       this.msg = "Du måste ge dokumentet ett namn för att kunna spara.";

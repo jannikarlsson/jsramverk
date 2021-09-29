@@ -12,9 +12,11 @@ import { OutputComponent } from './components/output/output.component';
 import { WarningComponent } from './components/warning/warning.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { SocketService } from './services/socket.service';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
-// const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
-const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+// const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
 
 @NgModule({
   
@@ -24,7 +26,9 @@ const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebs
     EditorComponent,
     OutputComponent,
     WarningComponent,
-  ],
+    LoginComponent,
+    RegisterComponent
+    ],
   imports: [
     BrowserModule,
     SocketIoModule.forRoot(config),

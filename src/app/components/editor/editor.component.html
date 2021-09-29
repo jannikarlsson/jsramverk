@@ -3,6 +3,8 @@
         <label>Titel:</label>
         <input type="text" id="title" value={{singleTitle}} formControlName="title" (input)="sendTitle()" required>
         <label>Innehåll:</label>
-        <quill-editor [styles]="{'min-height': '120px'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
+        <quill-editor [styles]="{'min-height': '120px', 'background-color': 'white'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
+        <p>Vem kan redigera?</p>
+        <div *ngFor="let item of allUsers"><input type="checkbox" id="{{item}}" (change)="check(item)" [checked]="active == item" [disabled]="active == item">{{item}}</div> 
     </div>
 </form>

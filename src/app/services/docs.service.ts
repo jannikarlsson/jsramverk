@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 export interface Docs {
   data: object;
@@ -10,26 +11,41 @@ export interface Docs {
 })
 export class DocsService {
   errorMessage;
+  // docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
+  docs = "http://localhost:1337/docs/"
 
   constructor(private http: HttpClient) { }
 
-  fetchDocs() {
-    return this.http.get<Docs>("https://jsramverk-editor-jaka19.azurewebsites.net/docs");
-    // return this.http.get<Docs>("http://localhost:1337/docs");
+  fetchDocs(token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        "x-access-token": token
+      })
+    };
+    return this.http.get<Docs>(this.docs, httpOptions);
   }
 
-  fetchOne(id) {
-    return this.http.get<Docs>("https://jsramverk-editor-jaka19.azurewebsites.net/docs/" + id);
-    // return this.http.get<Docs>("http://localhost:1337/docs/" + id);
-
+  fetchOne(id, token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        "x-access-token": token
+      })
+    };
+    return this.http.get<Docs>(this.docs + id, httpOptions);
   }
 
-  updateDoc(id, data) {
-    let url = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/" + id;
-    // let url = "http://localhost:1337/docs/" + id;
+  updateDoc(id, data, token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        "x-access-token": token
+      })
+    };
+    let url = this.docs + id;
     return this.http.post<any>(url, data).subscribe({
       next: ret => {
-        // console.log(ret);
       },
       error: error => {
           this.errorMessage = error.message;
@@ -38,9 +54,14 @@ export class DocsService {
     });
   }
 
-  sendDocs(data) {
-    return this.http.post<any>("https://jsramverk-editor-jaka19.azurewebsites.net/docs", data).subscribe({
-    // return this.http.post<any>("http://localhost:1337/docs", data).subscribe({
+  sendDocs(data, token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        "x-access-token": token
+      })
+    };
+    return this.http.post<any>(this.docs, data, httpOptions).subscribe({
 
       next: ret => {
         console.log(ret);

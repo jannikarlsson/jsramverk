@@ -6,7 +6,7 @@ label {
     font-family: sans-serif;
 }
 
-input {
+input[type=text] {
     width: 100%;
     min-height: 2em;
     border: 1px solid rgb(214, 212, 212);

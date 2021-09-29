@@ -1,0 +1,30 @@
+.login {
+    margin: 2em;
+    background: goldenrod;
+    font-family: sans-serif;
+    border-radius: 10px;
+}
+
+.form-group {
+    padding: 2em;
+}
+
+label {
+    font-family: sans-serif;
+}
+
+input {
+    width: 100%;
+    min-height: 2em;
+    border: 1px solid #999;
+    margin-bottom: 1em;
+}
+
+button {
+    width: 100%;
+    margin: 0, auto;
+    border: 1px solid #999;
+    background: lightgrey;
+    padding: 1em;
+    cursor: pointer;
+}
