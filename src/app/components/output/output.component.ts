@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { DocsService } from '../../services/docs.service';
 import { SocketService } from '../../services/socket.service';
 
@@ -13,6 +13,7 @@ export class OutputComponent implements OnInit {
   @Input() editorContent: string;
   @Input() active: string;
   @Input() token: string;
+  @Input() update: number;
   @Output() linkClick = new EventEmitter();
 
   text = "";
@@ -22,8 +23,19 @@ export class OutputComponent implements OnInit {
   constructor(private docsService: DocsService, private socketService: SocketService) { }
 
   ngOnInit(): void {
+    this.getAll()
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(changes['update']) {
+      this.getAll();
+    }
+  }
+
+  getAll() {
     this.docsService.fetchDocs(this.token)
         .subscribe((data) => {
+          this.arr = [];
           Object.values(data).forEach(item => {
             if(item["permissions"]) {
               let permissionsArr = Object.values(item["permissions"])
@@ -32,10 +44,7 @@ export class OutputComponent implements OnInit {
                 this.arr.push(item)
               }
             }
-            
           });
-          // this.arr = Object.values(data);
-          // console.log(this.arr);
         })
   }
 

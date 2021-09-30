@@ -44,12 +44,13 @@ export class DocsService {
       })
     };
     let url = this.docs + id;
-    return this.http.post<any>(url, data).subscribe({
+    return this.http.post<any>(url, data, httpOptions).subscribe({
       next: ret => {
       },
       error: error => {
           this.errorMessage = error.message;
           console.error('There was an error!', error);
+          console.log("ERROR")
       }
     });
   }

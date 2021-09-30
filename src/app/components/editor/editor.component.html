@@ -4,7 +4,7 @@
         <input type="text" id="title" value={{singleTitle}} formControlName="title" (input)="sendTitle()" required>
         <label>Innehåll:</label>
         <quill-editor [styles]="{'min-height': '120px', 'background-color': 'white'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
-        <p>Vem kan redigera?</p>
-        <div *ngFor="let item of allUsers"><input type="checkbox" id="{{item}}" (change)="check(item)" [checked]="active == item" [disabled]="active == item">{{item}}</div> 
+        <h2>Redigeringsbehörighet</h2>
+        <div *ngFor="let item of allUsers"><input type="checkbox" id="{{item}}" (change)="check(item)" [checked]="isPermitted(item)" [disabled]="active == item"><label for={{item}}> {{item}}</label></div> 
     </div>
 </form>

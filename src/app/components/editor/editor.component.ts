@@ -18,6 +18,7 @@ export class EditorComponent implements OnInit {
   @Input() singleId: string;
   @Input() active: string;
   @Input() token: string;
+  @Input() filePermissions: Array<any>;
   @Output() saveEvent = new EventEmitter();
   @Output() saveTitle = new EventEmitter();
   @Output() savePermissions = new EventEmitter();
@@ -50,7 +51,6 @@ export class EditorComponent implements OnInit {
       .getText()
       .subscribe((data) => {
         this.singleContent = data.html;
-        console.log("updated data")
     });
     this.authService.fetchUsers()
         .subscribe((data) => {
@@ -74,13 +74,20 @@ export class EditorComponent implements OnInit {
     }
   }
 
+  isPermitted(person) {
+    if (this.filePermissions && this.filePermissions.includes(person)) {
+      return true
+    } else {
+      return false
+    }
+  }
+
   sendTitle() {
     this.editorTitle = this.editorForm.get('title').value;
     this.saveTitle.emit(this.editorTitle);
   }
 
   check(value) {
-    console.log(value);
     if (this.checkedUsers.includes(value)) {
       this.checkedUsers.splice(this.checkedUsers.indexOf(value), 1)
     } else {

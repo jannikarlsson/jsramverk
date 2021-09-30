@@ -2,6 +2,11 @@
     padding: 2em;
 }
 
+h2 {
+    font-family: sans-serif;
+    padding: 1em 0;
+}
+
 label {
     font-family: sans-serif;
 }

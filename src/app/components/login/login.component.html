@@ -1,6 +1,8 @@
 <div class="login">
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        
         <div class="form-group">
+            <h2>Logga in</h2>
             <label>Användarnamn:</label>
             <input type="text" id="username" value="username" formControlName="username" required>
             <label>Lösenord:</label>

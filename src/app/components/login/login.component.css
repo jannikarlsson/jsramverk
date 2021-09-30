@@ -9,6 +9,10 @@
     padding: 2em;
 }
 
+h2 {
+    padding-bottom: 1em;
+}
+
 label {
     font-family: sans-serif;
 }

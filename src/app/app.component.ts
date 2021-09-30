@@ -21,7 +21,8 @@ export class AppComponent {
   msg: string;
   active: string;
   token: string;
-  filePermissions: Array<string>;
+  filePermissions: Array<any>;
+  update = 0;
 
   constructor(private docsService: DocsService) {
   }
@@ -56,6 +57,7 @@ export class AppComponent {
         this.singleId = data[0]._id;
         this.singleContent = data[0].content;
         this.singleTitle = data[0].title;
+        this.filePermissions = data[0].permissions;
         this.secretTitle = this.singleTitle;
         this.secretContent = this.singleContent;
       });
@@ -63,11 +65,16 @@ export class AppComponent {
 
   printContent($event: any): void {
     if (this.singleId && this.secretTitle) {
-      this.docsService.updateDoc(this.singleId, {title: this.secretTitle, content: this.secretContent, permissions: this.filePermissions}, this.token);
+      let res = this.docsService.updateDoc(this.singleId, {title: this.secretTitle, content: this.secretContent, permissions: this.filePermissions}, this.token);
+      console.log(res);
       this.msg = "";
     } else if (this.secretTitle) {
+      if (!this.filePermissions) {
+        this.filePermissions = [this.active];
+      }
       this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent, owner: this.active, permissions: this.filePermissions}, this.token)
       this.msg = "";
+      this.update += 1;
     } else {
       this.msg = "Du måste ge dokumentet ett namn för att kunna spara.";
     }
@@ -80,5 +87,6 @@ export class AppComponent {
     this.secretContent = "";
     this.secretTitle = "";
     this.msg = "";
+    this.filePermissions = [this.active];
   }
 }
