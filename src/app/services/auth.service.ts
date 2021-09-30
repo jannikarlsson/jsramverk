@@ -11,8 +11,8 @@ export interface Auth {
 })
 export class AuthService {
   errorMessage;
-  // docs = "https://jsramverk-editor-jaka19.azurewebsites.net/auth/"
-  docs = "http://localhost:1337/auth/"
+  docs = "https://jsramverk-editor-jaka19.azurewebsites.net/auth/"
+  // docs = "http://localhost:1337/auth/"
 
   constructor(private http: HttpClient) { }
 

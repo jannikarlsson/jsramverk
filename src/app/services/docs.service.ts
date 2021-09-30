@@ -11,8 +11,8 @@ export interface Docs {
 })
 export class DocsService {
   errorMessage;
-  // docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
-  docs = "http://localhost:1337/docs/"
+  docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
+  // docs = "http://localhost:1337/docs/"
 
   constructor(private http: HttpClient) { }
 
