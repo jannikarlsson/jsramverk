@@ -12,29 +12,39 @@ export interface Docs {
 export class DocsService {
   errorMessage;
   docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
+  gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
   // docs = "http://localhost:1337/docs/"
+  // gq = "http://localhost:1337/graphql"
 
   constructor(private http: HttpClient) { }
 
-  fetchDocs(token) {
+  // Gets all user's documents
+
+  fetchDocsGQ(username, token) {
     const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        "x-access-token": token
-      })
-    };
-    return this.http.get<Docs>(this.docs, httpOptions);
+          headers: new HttpHeaders({
+            'Content-Type':  'application/json',
+            "x-access-token": token
+          })
+        };
+    const query = `query{documents(username: "${username}"){_id, title}}`;
+    return this.http.post<any>(this.gq, {"query": query}, httpOptions);
   }
 
-  fetchOne(id, token) {
+  // Gets single document
+
+  fetchOneGQ(id, token) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type':  'application/json',
         "x-access-token": token
       })
     };
-    return this.http.get<Docs>(this.docs + id, httpOptions);
+    const query = `query{singleDoc(id: "${id}"){_id, title, content, owner, permissions}}`;
+    return this.http.post<any>(this.gq, {"query": query}, httpOptions);
   }
+
+  // Updates document in database
 
   updateDoc(id, data, token) {
     const httpOptions = {
@@ -54,6 +64,8 @@ export class DocsService {
       }
     });
   }
+
+  // Adds new document to database
 
   sendDocs(data, token) {
     const httpOptions = {

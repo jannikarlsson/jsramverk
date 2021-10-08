@@ -23,11 +23,15 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  // Register user on form submit
+
   onSubmit() {
     console.log(this.registerForm.value)
     console.log(this.authService.register(this.registerForm.value))
   }
 
+  // Opens and closes accordion
+  
   toggle() {
     if (this.toggleClass == false) {
       this.toggleClass = true

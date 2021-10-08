@@ -5,6 +5,6 @@
         <label>Innehåll:</label>
         <quill-editor [styles]="{'min-height': '120px', 'background-color': 'white'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
         <h2>Redigeringsbehörighet</h2>
-        <div *ngFor="let item of allUsers"><input type="checkbox" id="{{item}}" (change)="check(item)" [checked]="isPermitted(item)" [disabled]="active == item"><label for={{item}}> {{item}}</label></div> 
+        <div *ngFor="let item of allUsersGQ"><input type="checkbox" id="{{item}}" (change)="check(item)" [checked]="isPermitted(item)" [disabled]="active == item"><label for={{item}}> {{item}}</label></div> 
     </div>
 </form>

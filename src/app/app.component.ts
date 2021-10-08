@@ -47,17 +47,16 @@ export class AppComponent {
   receiveToken(data: object) {
     this.active = data["data"].user.username;
     this.token = data["data"].token;
-    console.log(this.token);
-    console.log(this.active);
   }
 
   openOne($event: any): void {
-    this.docsService.fetchOne($event, this.token)
+    // this.docsService.fetchOne($event, this.token)
+    this.docsService.fetchOneGQ($event, this.token)
       .subscribe((data) => {
-        this.singleId = data[0]._id;
-        this.singleContent = data[0].content;
-        this.singleTitle = data[0].title;
-        this.filePermissions = data[0].permissions;
+        this.singleId = data.data.singleDoc["_id"];
+        this.singleContent = data.data.singleDoc["content"];
+        this.singleTitle = data.data.singleDoc["title"];
+        this.filePermissions = data.data.singleDoc["permissions"];
         this.secretTitle = this.singleTitle;
         this.secretContent = this.singleContent;
       });

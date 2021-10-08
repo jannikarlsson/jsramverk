@@ -27,6 +27,7 @@ export class EditorComponent implements OnInit {
   editorForm: FormGroup;
   tempContent;
   allUsers = [];
+  allUsersGQ = [];
   checkedUsers = [];
 
   config = {
@@ -52,15 +53,20 @@ export class EditorComponent implements OnInit {
       .subscribe((data) => {
         this.singleContent = data.html;
     });
-    this.authService.fetchUsers()
+
+    // Gets user array using GraphQL
+
+    this.authService.fetchUsersGQ(this.token)
         .subscribe((data) => {
-          Object.values(data).forEach(item => {
-            this.allUsers.push(item["username"])
-            })
-          });
+            Object.values(data.data.users).forEach(item => {
+              this.allUsersGQ.push(item["username"])
+              })
+            });
     this.checkedUsers.push(this.active);
   }
   
+  // Emits editor content to app.js, updates database on change
+
   sendContent() {
     this.tempContent = this.editorForm.get('editor').value;
     this.saveEvent.emit(this.tempContent);
@@ -74,6 +80,8 @@ export class EditorComponent implements OnInit {
     }
   }
 
+  // Checks box if user is in document permissions, only used for editor.component.html
+
   isPermitted(person) {
     if (this.filePermissions && this.filePermissions.includes(person)) {
       return true
@@ -82,11 +90,15 @@ export class EditorComponent implements OnInit {
     }
   }
 
+  // Emits title changes to app.js
+
   sendTitle() {
     this.editorTitle = this.editorForm.get('title').value;
     this.saveTitle.emit(this.editorTitle);
   }
 
+  // Toggles user permission on check or uncheck, only used for editor.component.html
+  
   check(value) {
     if (this.checkedUsers.includes(value)) {
       this.checkedUsers.splice(this.checkedUsers.indexOf(value), 1)

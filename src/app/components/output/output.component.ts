@@ -16,46 +16,38 @@ export class OutputComponent implements OnInit {
   @Input() update: number;
   @Output() linkClick = new EventEmitter();
 
-  text = "";
-  arr = [];
-  single = {};
+  // text = "";
+  arrGQ = [];
+  // single = {};
 
   constructor(private docsService: DocsService, private socketService: SocketService) { }
 
   ngOnInit(): void {
-    this.getAll()
+    this.getAllGQ();
   }
+
+  // Updates document list on save
 
   ngOnChanges(changes: SimpleChanges): void {
     if(changes['update']) {
-      this.getAll();
+      this.getAllGQ();
     }
   }
 
-  getAll() {
-    this.docsService.fetchDocs(this.token)
+  // Gets documents using GraphQL
+
+  getAllGQ() {
+    this.docsService.fetchDocsGQ(this.active, this.token)
         .subscribe((data) => {
-          this.arr = [];
-          Object.values(data).forEach(item => {
-            if(item["permissions"]) {
-              let permissionsArr = Object.values(item["permissions"])
-              console.log(permissionsArr);
-              if (permissionsArr.includes(this.active)) {
-                this.arr.push(item)
-              }
-            }
-          });
+          this.arrGQ = data.data["documents"];
         })
   }
+
+  // Opens single document using GraphQL
 
   openDoc(id): void {
     this.socketService.createRoom(id);
     console.log(`room ${id} created`);
     this.linkClick.emit(id);
-    this.docsService.fetchOne(id, this.token)
-      .subscribe((data) => {
-        this.single = data[0].content;
-        console.log("från databasen")
-      });
   }
 }

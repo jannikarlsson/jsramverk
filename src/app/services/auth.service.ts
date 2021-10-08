@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 export interface Auth {
   data: object;
@@ -12,18 +11,32 @@ export interface Auth {
 export class AuthService {
   errorMessage;
   docs = "https://jsramverk-editor-jaka19.azurewebsites.net/auth/"
+  gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
   // docs = "http://localhost:1337/auth/"
+  // gq = "http://localhost:1337/graphql"
 
   constructor(private http: HttpClient) { }
+
+  // Validates user and logs in
 
   login(data) {
     let url = this.docs + "login"
     return this.http.post<any>(url, data)
   }
 
-  fetchUsers() {
-    return this.http.get<any>(this.docs);
+  // Gets list of all users for permissions
+
+  fetchUsersGQ(token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        "x-access-token": token
+      })
+    };
+    return this.http.post<any>(this.gq, {"query": "query{users{username}}"}, httpOptions);
   }
+
+  // Registers new user
 
   register(data) {
     let url = this.docs + "register"
