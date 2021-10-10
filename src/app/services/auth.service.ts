@@ -10,10 +10,10 @@ export interface Auth {
 })
 export class AuthService {
   errorMessage;
-  docs = "https://jsramverk-editor-jaka19.azurewebsites.net/auth/"
-  gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
-  // docs = "http://localhost:1337/auth/"
-  // gq = "http://localhost:1337/graphql"
+  // docs = "https://jsramverk-editor-jaka19.azurewebsites.net/auth/"
+  // gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
+  docs = "http://localhost:1337/auth/"
+  gq = "http://localhost:1337/graphql"
 
   constructor(private http: HttpClient) { }
 

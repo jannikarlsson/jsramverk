@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { faPrint } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-header',
@@ -10,9 +12,11 @@ import { faFile } from '@fortawesome/free-solid-svg-icons';
 export class HeaderComponent implements OnInit {
   @Output() buttonClick = new EventEmitter();
   @Output() buttonClear = new EventEmitter();
+  @Output() printClick = new EventEmitter();
 
   faSave = faSave;
   faFile = faFile;
+  faPrint = faPrint;
 
   constructor() { }
 
@@ -25,5 +29,9 @@ export class HeaderComponent implements OnInit {
 
   saveButton() {
     this.buttonClick.emit("clicked");
+  }
+
+  printButton() {
+    this.printClick.emit("clicked");
   }
 }

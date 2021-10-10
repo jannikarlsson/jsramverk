@@ -79,6 +79,10 @@ export class AppComponent {
     }
   }
 
+  toPrinter($event: any) {
+    this.docsService.sendToPrinter({"title": this.secretTitle, "content": this.secretContent});
+  }
+
   clearForm($event: any): void {
     this.singleContent = "";
     this.singleTitle = "";

@@ -1,7 +1,7 @@
 <div *ngIf="token; then loggedIn else login"></div>
 <ng-template #loggedIn>
 
-<app-header (buttonClick)="printContent($event)" (buttonClear)="clearForm($event)"></app-header>
+<app-header (buttonClick)="printContent($event)" (buttonClear)="clearForm($event)" (printClick)="toPrinter($event)"></app-header>
 <ng-content select="tools"></ng-content>
 <app-warning [msg]="msg"></app-warning>
 <app-editor [singleContent]="singleContent" [singleTitle]="singleTitle" [filePermissions]="filePermissions" [singleId]="singleId" [active]="active" [token]="token" (saveEvent)="receiveContent($event)" (saveTitle)="receiveTitle($event)" (savePermissions)="receivePermissions($event)"></app-editor>

@@ -15,8 +15,8 @@ import { SocketService } from './services/socket.service';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 
-// const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
-const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+// const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
 
 @NgModule({
   
