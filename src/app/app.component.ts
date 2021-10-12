@@ -18,6 +18,7 @@ export class AppComponent {
   singleContent: string;
   singleTitle: string;
   singleId: string;
+  singleComments: Array<any>;
   msg: string;
   active: string;
   token: string;
@@ -49,14 +50,22 @@ export class AppComponent {
     this.token = data["data"].token;
   }
 
+  // Tar emot kommentaren och skickar den till docs.service
+  
+  receiveComment(data: object) {
+    this.docsService.addComment(data, this.token);
+  }
+
   openOne($event: any): void {
     // this.docsService.fetchOne($event, this.token)
     this.docsService.fetchOneGQ($event, this.token)
       .subscribe((data) => {
-        this.singleId = data.data.singleDoc["_id"];
-        this.singleContent = data.data.singleDoc["content"];
-        this.singleTitle = data.data.singleDoc["title"];
-        this.filePermissions = data.data.singleDoc["permissions"];
+        console.log(data);
+        this.singleId = data["_id"];
+        this.singleContent = data["content"];
+        this.singleTitle = data["title"];
+        this.filePermissions = data["permissions"];
+        this.singleComments = data["comments"];
         this.secretTitle = this.singleTitle;
         this.secretContent = this.singleContent;
       });
@@ -88,6 +97,7 @@ export class AppComponent {
     this.singleTitle = "";
     this.singleId = "";
     this.secretContent = "";
+    this.singleComments = [];
     this.secretTitle = "";
     this.msg = "";
     this.filePermissions = [this.active];

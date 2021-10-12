@@ -16,12 +16,14 @@ export class EditorComponent implements OnInit {
   @Input() singleContent: string;
   @Input() singleTitle: string;
   @Input() singleId: string;
+  @Input() singleComments: Array<any>;
   @Input() active: string;
   @Input() token: string;
   @Input() filePermissions: Array<any>;
   @Output() saveEvent = new EventEmitter();
   @Output() saveTitle = new EventEmitter();
   @Output() savePermissions = new EventEmitter();
+  @Output() commentEvent = new EventEmitter();
 
   editorTitle: string = "";
   editorForm: FormGroup;
@@ -29,6 +31,7 @@ export class EditorComponent implements OnInit {
   allUsers = [];
   allUsersGQ = [];
   checkedUsers = [];
+  commentText;
 
   config = {
     toolbar: [
@@ -45,7 +48,8 @@ export class EditorComponent implements OnInit {
   ngOnInit(): void {
     this.editorForm = new FormGroup({
       'editor': new FormControl(null),
-      'title': new FormControl(null)
+      'title': new FormControl(null),
+      'comment': new FormControl(null)
     })
     this.singleTitle;
     this.socketService
@@ -107,5 +111,22 @@ export class EditorComponent implements OnInit {
     }
     console.log(this.checkedUsers)
     this.savePermissions.emit(this.checkedUsers);
+  }
+
+  // Gets selected text
+  comment() {
+    let selection = window.getSelection().toString();
+    this.commentText = selection.toString();
+    this.editorForm.controls['comment'].reset()
+  }
+
+  saveComment() {
+    let commentData = {"id": this.singleId, "text": this.commentText, "comment": this.editorForm.get('comment').value, "user": this.active}
+    this.commentEvent.emit(commentData);
+    this.commentText = "";
+    this.docsService.fetchOneGQ(this.singleId, this.token)
+      .subscribe((data) => {
+        this.singleComments = data["comments"]
+      });
   }
 }

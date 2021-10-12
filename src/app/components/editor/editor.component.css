@@ -2,12 +2,12 @@
     padding: 2em;
 }
 
-h2 {
+h2, h3 {
     font-family: sans-serif;
     padding: 1em 0;
 }
 
-label {
+label, p {
     font-family: sans-serif;
 }
 
@@ -16,4 +16,38 @@ input[type=text] {
     min-height: 2em;
     border: 1px solid rgb(214, 212, 212);
     margin-bottom: 1em;
+}
+
+.hide {
+    display: none;
+}
+
+.comment {
+    background-color: beige;
+    font-family: sans-serif;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+
+.comment .text {
+    font-style: italic;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.comment .content {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.comment .user {
+    font-size: 10px;
+}
+
+button {
+    height: 2em;
+    margin-right: 1em;
+    padding: 1em 1em;
+    padding-bottom: 1em;
+    line-height: 0px;
 }
