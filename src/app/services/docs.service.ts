@@ -122,6 +122,25 @@ export class DocsService {
     });
   }
 
+  addPermission(data, token) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        "x-access-token": token
+      })
+    };
+    let url = this.docs + "permission";
+    return this.http.post<any>(url, data, httpOptions).subscribe({
+      next: ret => {
+        console.log(ret)
+      },
+      error: error => {
+          this.errorMessage = error.message;
+          console.error('There was an error!', error);
+      }
+    });
+  }
+
   sendToPrinter(data) {
     let url = this.docs + "print";
     return this.http.post<any>(url, data).subscribe({

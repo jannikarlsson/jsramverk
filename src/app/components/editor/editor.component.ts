@@ -129,4 +129,15 @@ export class EditorComponent implements OnInit {
         this.singleComments = data["comments"]
       });
   }
+
+  // Den här funktionen ska kunna highlighta en sträng i editorn
+
+  highlight(text) {
+    console.log("highlighted " + text)
+    if (this.singleContent.includes(text)) {
+      console.log(true);
+    } else {
+      console.log(false);
+    }
+  }
 }

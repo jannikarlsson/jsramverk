@@ -5,6 +5,7 @@
 <ng-content select="tools"></ng-content>
 <app-warning [msg]="msg"></app-warning>
 <app-editor [singleContent]="singleContent" [singleTitle]="singleTitle" [filePermissions]="filePermissions" [singleComments]="singleComments" [singleId]="singleId" [active]="active" [token]="token" (saveEvent)="receiveContent($event)" (saveTitle)="receiveTitle($event)" (savePermissions)="receivePermissions($event)" (commentEvent)="receiveComment($event)"></app-editor>
+<app-email [singleId]="singleId" [active]="active" [token]="token" [singleTitle]="singleTitle"></app-email>
 <app-output [editorContent]="editorContent" [active]="active" [token]="token" [update]="update" (linkClick)="openOne($event)"></app-output>
 
 </ng-template>

@@ -15,7 +15,7 @@
 
         <!-- Kommentarer -->
         <h3 [ngClass]="{'hide': !singleComments || !singleId }">Kommentarer</h3>
-        <div *ngFor="let item of singleComments" class="comment">
+        <div *ngFor="let item of singleComments" class="comment" (click)="highlight(item.text)">
             <p class="text">{{ item.text }}</p>
             <p class="content">{{ item.comment }}</p>
             <p class="user">{{ item.user }}</p>
