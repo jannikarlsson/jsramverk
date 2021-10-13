@@ -15,6 +15,8 @@ import { SocketService } from './services/socket.service';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { EmailComponent } from './components/email/email.component';
+import { FormsModule } from '@angular/forms';
+import { CodemirrorModule } from '@ctrl/ngx-codemirror';
 
 const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
 // const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
@@ -39,6 +41,9 @@ const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
     QuillModule.forRoot(),
     FontAwesomeModule,
     HttpClientModule,
+    BrowserModule,
+    FormsModule,
+    CodemirrorModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [    

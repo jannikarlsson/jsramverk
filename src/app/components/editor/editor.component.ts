@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SocketService } from '../../services/socket.service';
 import { DocsService } from '../../services/docs.service';
@@ -18,6 +18,7 @@ export class EditorComponent implements OnInit {
   @Input() singleId: string;
   @Input() singleComments: Array<any>;
   @Input() active: string;
+  @Input() editor: string;
   @Input() token: string;
   @Input() filePermissions: Array<any>;
   @Output() saveEvent = new EventEmitter();
@@ -32,6 +33,7 @@ export class EditorComponent implements OnInit {
   allUsersGQ = [];
   checkedUsers = [];
   commentText;
+  content;
 
   config = {
     toolbar: [
@@ -72,7 +74,11 @@ export class EditorComponent implements OnInit {
   // Emits editor content to app.js, updates database on change
 
   sendContent() {
-    this.tempContent = this.editorForm.get('editor').value;
+    if (this.editor == "code") {
+      this.tempContent = this.content;
+    } else {
+      this.tempContent = this.editorForm.get('editor').value;
+    }
     this.saveEvent.emit(this.tempContent);
     if (this.singleId) {
       let data = {
@@ -130,7 +136,7 @@ export class EditorComponent implements OnInit {
       });
   }
 
-  // Den här funktionen ska kunna highlighta en sträng i editorn
+  // Den här funktionen ska kunna highlighta en sträng i editorn, men den är inte klar
 
   highlight(text) {
     console.log("highlighted " + text)

@@ -2,6 +2,22 @@
     padding: 2em;
 }
 
+.comment-list {
+    padding: 0 2em;
+}
+
+.comment-form {
+    padding: 0;
+}
+
+.permissions {
+    padding: 0 2em 2em;
+}
+
+#code {
+    padding: 0 2em 2em;
+}
+
 h2, h3 {
     font-family: sans-serif;
     padding: 1em 0;

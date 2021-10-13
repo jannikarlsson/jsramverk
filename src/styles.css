@@ -3,6 +3,8 @@
 @import '~quill/dist/quill.snow.css';
 @import '~quill/dist/quill.bubble.css';
 
+@import '~codemirror/lib/codemirror';
+@import '~codemirror/theme/material';
 * {
     margin: 0;
     padding: 0;

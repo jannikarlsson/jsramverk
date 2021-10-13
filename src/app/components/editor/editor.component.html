@@ -4,28 +4,40 @@
         <label>Titel:</label>
         <input type="text" id="title" value={{singleTitle}} formControlName="title" (input)="sendTitle()" required>
         <label>Innehåll:</label>
-        <quill-editor [styles]="{'min-height': '120px', 'background-color': 'white'}" [(ngModel)]="singleContent" [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
-
+        <quill-editor *ngIf="editor == 'text'" [styles]="{'min-height': '120px', 'background-color': 'white'}" [(ngModel)]="singleContent"
+            [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
         <!-- Kommentera -->
+        <div class="comment-form" *ngIf="editor == 'text'">
         <h3 [ngClass]="{'hide': !singleId}">Kommentera</h3>
         <p [ngClass]="{'hide': !commentText}">{{ commentText }}</p>
         <input type="text" formControlName="comment" id="comment" [ngClass]="{'hide': !commentText}">
         <button (click)="comment()" [ngClass]="{'hide': !singleId}">Ny kommentar</button>
         <button (click)="saveComment()" [ngClass]="{'hide': !commentText}">Spara kommentar</button>
-
-        <!-- Kommentarer -->
-        <h3 [ngClass]="{'hide': !singleComments || !singleId }">Kommentarer</h3>
-        <div *ngFor="let item of singleComments" class="comment" (click)="highlight(item.text)">
-            <p class="text">{{ item.text }}</p>
-            <p class="content">{{ item.comment }}</p>
-            <p class="user">{{ item.user }}</p>
-        </div>
-
-        <!-- Behörigheter -->
-        <h2>Redigeringsbehörighet</h2>
-        <div *ngFor="let item of allUsersGQ">
-            <input type="checkbox" id="{{item}}" (change)="check(item)" [checked]="isPermitted(item)" [disabled]="active == item">
-            <label for={{item}}> {{item}}</label>
-        </div> 
-    </div>
+    </div></div>
 </form>
+<!-- Kommentarer -->
+<div class="comment-list">
+    <h3 [ngClass]="{'hide': !singleComments || !singleId }">Kommentarer</h3>
+    <div *ngFor="let item of singleComments" class="comment" (click)="highlight(item.text)">
+        <p class="text">{{ item.text }}</p>
+        <p class="content">{{ item.comment }}</p>
+        <p class="user">{{ item.user }}</p>
+    </div>
+</div>
+<!-- Code editor -->
+<div id="code" *ngIf="editor == 'code'">
+    <ngx-codemirror (keyup)="sendContent()" [(ngModel)]="singleContent" [options]="{
+    lineNumbers: true,
+    theme: 'material',
+    mode: 'javascript'
+  }"></ngx-codemirror>
+</div>
+<div class="permissions">
+    <!-- Behörigheter -->
+    <h2>Redigeringsbehörighet</h2>
+    <div *ngFor="let item of allUsersGQ">
+        <input type="checkbox" id="{{item}}" (change)="check(item)" [checked]="isPermitted(item)"
+            [disabled]="active == item">
+        <label for={{item}}> {{item}}</label>
+    </div>
+</div>

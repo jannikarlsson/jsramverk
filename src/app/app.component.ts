@@ -19,6 +19,8 @@ export class AppComponent {
   singleTitle: string;
   singleId: string;
   singleComments: Array<any>;
+  editor = "text";
+  button = "Code mode";
   msg: string;
   active: string;
   token: string;
@@ -33,10 +35,13 @@ export class AppComponent {
   }
 
   receiveContent($event: string) {
+    console.log($event);
+
     this.secretContent = $event;
   }
 
   receiveTitle($event: string) {
+    console.log($event);
     this.secretTitle = $event;
   }
 
@@ -68,6 +73,7 @@ export class AppComponent {
         this.singleComments = data["comments"];
         this.secretTitle = this.singleTitle;
         this.secretContent = this.singleContent;
+        this.editor = data["type"] || "text";
       });
   }
 
@@ -80,7 +86,7 @@ export class AppComponent {
       if (!this.filePermissions) {
         this.filePermissions = [this.active];
       }
-      this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent, owner: this.active, permissions: this.filePermissions}, this.token)
+      this.docsService.sendDocs({title: this.secretTitle, content: this.secretContent, owner: this.active, type: this.editor, permissions: this.filePermissions}, this.token)
       this.msg = "";
       this.update += 1;
     } else {
@@ -101,5 +107,19 @@ export class AppComponent {
     this.secretTitle = "";
     this.msg = "";
     this.filePermissions = [this.active];
+    this.editor = "text";
+    this.button = "Code mode";
   }
+
+  changeEditor() {
+    if (this.editor == "text") {
+      this.editor = "code";
+      this.button = "Text mode"
+    } else {
+      this.editor = "text";
+      this.button = "Code mode";
+    }
+    console.log(this.editor)
+  }
+    
 }
