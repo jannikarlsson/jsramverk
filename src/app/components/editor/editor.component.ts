@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SocketService } from '../../services/socket.service';
 import { DocsService } from '../../services/docs.service';
@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   selector: 'app-editor',
   templateUrl: './editor.component.html',
   styleUrls: ['./editor.component.css'],
-  providers: [ SocketService ]
+  providers: [SocketService]
 })
 export class EditorComponent implements OnInit {
 
@@ -39,7 +39,7 @@ export class EditorComponent implements OnInit {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
       ['code-block'],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['link']
     ]
@@ -58,19 +58,19 @@ export class EditorComponent implements OnInit {
       .getText()
       .subscribe((data) => {
         this.singleContent = data.html;
-    });
+      });
 
     // Gets user array using GraphQL
 
     this.authService.fetchUsersGQ(this.token)
-        .subscribe((data) => {
-            Object.values(data.data.users).forEach(item => {
-              this.allUsersGQ.push(item["username"])
-              })
-            });
+      .subscribe((data) => {
+        Object.values(data.data.users).forEach(item => {
+          this.allUsersGQ.push(item["username"])
+        })
+      });
     this.checkedUsers.push(this.active);
   }
-  
+
   // Emits editor content to app.js, updates database on change
 
   sendContent() {
@@ -86,7 +86,7 @@ export class EditorComponent implements OnInit {
         html: this.tempContent
       };
       this.socketService.sendText(data);
-      this.docsService.updateDoc(this.singleId, {title: this.singleTitle, content: this.tempContent}, this.token);
+      this.docsService.updateDoc(this.singleId, { title: this.singleTitle, content: this.tempContent }, this.token);
     }
   }
 
@@ -108,7 +108,7 @@ export class EditorComponent implements OnInit {
   }
 
   // Toggles user permission on check or uncheck, only used for editor.component.html
-  
+
   check(value) {
     if (this.checkedUsers.includes(value)) {
       this.checkedUsers.splice(this.checkedUsers.indexOf(value), 1)
@@ -127,7 +127,7 @@ export class EditorComponent implements OnInit {
   }
 
   saveComment() {
-    let commentData = {"id": this.singleId, "text": this.commentText, "comment": this.editorForm.get('comment').value, "user": this.active}
+    let commentData = { "id": this.singleId, "text": this.commentText, "comment": this.editorForm.get('comment').value, "user": this.active }
     this.commentEvent.emit(commentData);
     this.commentText = "";
     this.docsService.fetchOneGQ(this.singleId, this.token)
@@ -145,5 +145,13 @@ export class EditorComponent implements OnInit {
     } else {
       console.log(false);
     }
+  }
+
+  exec() {
+    var data = {
+      code: btoa(this.singleContent)
+    };
+    console.log(data);
+    this.docsService.executeCode(data);
   }
 }

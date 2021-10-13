@@ -22,13 +22,13 @@ export class DocsService {
 
   fetchDocsGQ(username, token) {
     const httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type':  'application/json',
-            "x-access-token": token
-          })
-        };
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        "x-access-token": token
+      })
+    };
     const query = `query{documents(username: "${username}"){_id, title}}`;
-    return this.http.post<any>(this.gq, {"query": query}, httpOptions);
+    return this.http.post<any>(this.gq, { "query": query }, httpOptions);
   }
 
   // Gets single document
@@ -36,7 +36,7 @@ export class DocsService {
   fetchOneGQ(id, token) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         "x-access-token": token
       })
     };
@@ -64,7 +64,7 @@ export class DocsService {
   updateDoc(id, data, token) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         "x-access-token": token
       })
     };
@@ -73,9 +73,9 @@ export class DocsService {
       next: ret => {
       },
       error: error => {
-          this.errorMessage = error.message;
-          console.error('There was an error!', error);
-          console.log("ERROR")
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
+        console.log("ERROR")
       }
     });
   }
@@ -85,7 +85,7 @@ export class DocsService {
   sendDocs(data, token) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         "x-access-token": token
       })
     };
@@ -95,8 +95,8 @@ export class DocsService {
         console.log(ret);
       },
       error: error => {
-          this.errorMessage = error.message;
-          console.error('There was an error!', error);
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
       }
     });
   }
@@ -106,7 +106,7 @@ export class DocsService {
   addComment(data, token) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         "x-access-token": token
       })
     };
@@ -116,8 +116,8 @@ export class DocsService {
         console.log(ret)
       },
       error: error => {
-          this.errorMessage = error.message;
-          console.error('There was an error!', error);
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
       }
     });
   }
@@ -125,7 +125,7 @@ export class DocsService {
   addPermission(data, token) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
+        'Content-Type': 'application/json',
         "x-access-token": token
       })
     };
@@ -135,8 +135,8 @@ export class DocsService {
         console.log(ret)
       },
       error: error => {
-          this.errorMessage = error.message;
-          console.error('There was an error!', error);
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
       }
     });
   }
@@ -146,14 +146,55 @@ export class DocsService {
     return this.http.post<any>(url, data).subscribe({
       next: ret => {
         let arr = new Uint8Array(ret.data);
-        let file = new Blob([arr], {type: 'application/pdf'});
+        let file = new Blob([arr], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
         window.open(fileURL);
       },
       error: error => {
-          this.errorMessage = error.message;
-          console.error('There was an error!', error);
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
       }
     });
   }
+
+  executeCode(data) {
+    let url = "https://execjs.emilfolino.se/code";
+    let headers = new HttpHeaders({ 'Access-Control-Allow-Origin': '*','content-type': 'application/json'})
+
+    console.log(data);
+    console.log(headers);
+
+    return this.http.post<any>(url, JSON.stringify(data), {headers: headers}).subscribe({
+      next: ret => {
+        console.log(ret);
+        let decodedOutput = atob(ret.data);
+        console.log(decodedOutput); // outputs: hej
+      },
+      error: error => {
+        this.errorMessage = error.message;
+        console.error('There was an error!', error);
+      }
+    });
+  }
+
+  // executeCode(inp) {
+  //   var data = {
+  //     code: btoa(inp)
+  // };
+  
+  // fetch("http://execjs.emilfolino.se/code", {
+  //     body: JSON.stringify(data),
+  //     headers: {
+  //         'content-type': 'application/json'
+  //       },
+  //     method: 'POST'
+  // })
+  // .then(function (response) {
+  //     return response.json();
+  // })
+  // .then(function(result) {
+  //     let decodedOutput = atob(result.data);
+  //     console.log(decodedOutput); // outputs: hej
+  // });
+  // }
 }
