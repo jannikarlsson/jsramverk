@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 import { faPrint } from '@fortawesome/free-solid-svg-icons';
@@ -13,6 +13,7 @@ export class HeaderComponent implements OnInit {
   @Output() buttonClick = new EventEmitter();
   @Output() buttonClear = new EventEmitter();
   @Output() printClick = new EventEmitter();
+  @Input() editor: string;
 
   faSave = faSave;
   faFile = faFile;

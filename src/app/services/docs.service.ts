@@ -27,7 +27,7 @@ export class DocsService {
         "x-access-token": token
       })
     };
-    const query = `query{documents(username: "${username}"){_id, title}}`;
+    const query = `query{documents(username: "${username}"){_id, title, type}}`;
     return this.http.post<any>(this.gq, { "query": query }, httpOptions);
   }
 
@@ -90,9 +90,9 @@ export class DocsService {
       })
     };
     return this.http.post<any>(this.docs, data, httpOptions).subscribe({
-
       next: ret => {
         console.log(ret);
+        return ret;
       },
       error: error => {
         this.errorMessage = error.message;

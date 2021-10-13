@@ -75,11 +75,12 @@ export class EditorComponent implements OnInit {
 
   sendContent() {
     if (this.editor == "code") {
-      this.tempContent = this.content;
+      this.tempContent = this.singleContent;
     } else {
       this.tempContent = this.editorForm.get('editor').value;
     }
     this.saveEvent.emit(this.tempContent);
+    console.log(this.tempContent)
     if (this.singleId) {
       let data = {
         _id: this.singleId,

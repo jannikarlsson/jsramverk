@@ -20,7 +20,7 @@ export class AppComponent {
   singleId: string;
   singleComments: Array<any>;
   editor = "text";
-  button = "Code mode";
+  button = "Byt till kodeditor";
   msg: string;
   active: string;
   token: string;
@@ -108,16 +108,16 @@ export class AppComponent {
     this.msg = "";
     this.filePermissions = [this.active];
     this.editor = "text";
-    this.button = "Code mode";
+    this.button = "Byt till kodeditor";
   }
 
   changeEditor() {
     if (this.editor == "text") {
       this.editor = "code";
-      this.button = "Text mode"
+      this.button = "Byt till texteditor"
     } else {
       this.editor = "text";
-      this.button = "Code mode";
+      this.button = "Byt till kodeditor";
     }
     console.log(this.editor)
   }

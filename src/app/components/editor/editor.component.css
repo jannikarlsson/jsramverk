@@ -67,3 +67,7 @@ button {
     padding-bottom: 1em;
     line-height: 0px;
 }
+
+button.exec {
+    margin-top: 2em;
+}

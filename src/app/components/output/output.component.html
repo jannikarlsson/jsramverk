@@ -1,4 +1,4 @@
 <div class="output">
 <h2>Dina sparade dokument</h2>
-<p class="docs" *ngFor="let item of arrGQ" (click)="openDoc(item._id)">{{item.title}}</p>
+<p class="docs" *ngFor="let item of arrGQ" (click)="openDoc(item._id)"><fa-icon class="icon" [icon]="faFileCode" *ngIf="item.type == 'code'"></fa-icon><fa-icon class="icon" [icon]="faFileWord" *ngIf="item.type == 'text'"></fa-icon> {{item.title}}</p>
 </div>
