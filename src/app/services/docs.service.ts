@@ -11,10 +11,10 @@ export interface Docs {
 })
 export class DocsService {
   errorMessage;
-  // docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
-  // gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
-  docs = "http://localhost:1337/docs/"
-  gq = "http://localhost:1337/graphql"
+  docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
+  gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
+  // docs = "http://localhost:1337/docs/"
+  // gq = "http://localhost:1337/graphql"
 
   constructor(private http: HttpClient) { }
 
@@ -46,18 +46,6 @@ export class DocsService {
     return this.http.get<Docs>(url, httpOptions);
   }
 
-
-
-  // getComments(id, token) {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type':  'application/json',
-  //       "x-access-token": token
-  //     })
-  //   };
-  //   const query = `query{singleDoc(id: "${id}"){comments}}`;
-  //   return this.http.post<any>(this.gq, {"query": query}, httpOptions);
-  // }
 
   // Updates document in database
 
@@ -146,6 +134,7 @@ export class DocsService {
     return this.http.post<any>(url, data).subscribe({
       next: ret => {
         let arr = new Uint8Array(ret.data);
+        console.log(arr);
         let file = new Blob([arr], { type: 'application/pdf' });
         var fileURL = URL.createObjectURL(file);
         window.open(fileURL);

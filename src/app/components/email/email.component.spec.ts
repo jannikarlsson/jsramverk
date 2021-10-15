@@ -1,6 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EmailComponent } from './email.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { SocketService } from '../../services/socket.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+
+// const config: SocketIoConfig = { url: 'http://localhost:1337', options: {} };
+const config: SocketIoConfig = { url: 'https://jsramverk-editor-jaka19.azurewebsites.net', options: {} };
 
 describe('EmailComponent', () => {
   let component: EmailComponent;
@@ -8,7 +14,9 @@ describe('EmailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EmailComponent ]
+      declarations: [ EmailComponent ],
+      imports: [HttpClientTestingModule, SocketIoModule.forRoot(config)],
+      providers: [ SocketService ]
     })
     .compileComponents();
   });

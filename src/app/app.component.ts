@@ -35,19 +35,15 @@ export class AppComponent {
   }
 
   receiveContent($event: string) {
-    console.log($event);
-
     this.secretContent = $event;
   }
 
   receiveTitle($event: string) {
-    console.log($event);
     this.secretTitle = $event;
   }
 
   receivePermissions($event) {
     this.filePermissions = $event;
-    console.log(this.filePermissions)
   }
 
   receiveToken(data: object) {
@@ -65,7 +61,6 @@ export class AppComponent {
     // this.docsService.fetchOne($event, this.token)
     this.docsService.fetchOneGQ($event, this.token)
       .subscribe((data) => {
-        console.log(data);
         this.singleId = data["_id"];
         this.singleContent = data["content"];
         this.singleTitle = data["title"];
@@ -73,7 +68,7 @@ export class AppComponent {
         this.singleComments = data["comments"];
         this.secretTitle = this.singleTitle;
         this.secretContent = this.singleContent;
-        this.editor = data["type"] || "text";
+        this.editor = data["type"];
       });
   }
 
@@ -119,7 +114,6 @@ export class AppComponent {
       this.editor = "text";
       this.button = "Byt till kodeditor";
     }
-    console.log(this.editor)
   }
     
 }

@@ -32,11 +32,11 @@ describe('EditorComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('entering text should trigger eventemitter', () => {
-    const onClickMock = spyOn(component, 'sendContent');
-    fixture.debugElement.query(By.css("quill-editor")).triggerEventHandler('keyup', null);
-    expect(onClickMock).toHaveBeenCalled();
-  });
+  // it('entering text should trigger eventemitter', () => {
+  //   const onClickMock = spyOn(component, 'sendContent');
+  //   fixture.debugElement.query(By.css("quill-editor")).triggerEventHandler('keyup', null);
+  //   expect(onClickMock).toHaveBeenCalled();
+  // });
 
   it('entering title should trigger eventemitter', () => {
     const onClickMock = spyOn(component, 'sendTitle');

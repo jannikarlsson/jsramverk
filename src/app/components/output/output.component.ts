@@ -35,7 +35,6 @@ export class OutputComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllGQ();
-    console.log(this.editor);
   }
 
   // Updates document list on save
@@ -52,7 +51,7 @@ export class OutputComponent implements OnInit {
     this.docsService.fetchDocsGQ(this.active, this.token)
         .subscribe((data) => {
           this.arrGQ = data.data["documents"];
-          console.log(this.arrGQ)
+          console.log(this.arrGQ);
         })
   }
 

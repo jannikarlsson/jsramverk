@@ -4,9 +4,9 @@
         <div class="form-group">
             <h2>Logga in</h2>
             <label>Användarnamn:</label>
-            <input type="text" id="username" value="username" formControlName="username" required>
+            <input type="text" value="username" formControlName="username" required>
             <label>Lösenord:</label>
-            <input type="password" id="password" value="password" formControlName="password" required>
+            <input type="password" value="password" formControlName="password" required>
             <button type="submit" [disabled]="!loginForm.valid">Logga in</button>
         </div>
     </form>
