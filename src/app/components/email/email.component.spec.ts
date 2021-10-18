@@ -27,7 +27,11 @@ describe('EmailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should have a form', () => {
+    expect(component.emailForm).toBeTruthy();
   });
 });

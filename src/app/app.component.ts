@@ -34,31 +34,40 @@ export class AppComponent {
     this.msg = "";
   }
 
+  // Receives editor content
+
   receiveContent($event: string) {
     this.secretContent = $event;
   }
+
+  // Receives title from editor
 
   receiveTitle($event: string) {
     this.secretTitle = $event;
   }
 
+  // Receives permissions from editor
+
   receivePermissions($event) {
     this.filePermissions = $event;
   }
+
+  // Receives token from login function
 
   receiveToken(data: object) {
     this.active = data["data"].user.username;
     this.token = data["data"].token;
   }
 
-  // Tar emot kommentaren och skickar den till docs.service
+  // Receives comment from editor
   
   receiveComment(data: object) {
     this.docsService.addComment(data, this.token);
   }
 
+  // Opens a document
+
   openOne($event: any): void {
-    // this.docsService.fetchOne($event, this.token)
     this.docsService.fetchOneGQ($event, this.token)
       .subscribe((data) => {
         this.singleId = data["_id"];
@@ -71,6 +80,8 @@ export class AppComponent {
         this.editor = data["type"];
       });
   }
+
+  // Saves or updates document
 
   printContent($event: any): void {
     if (this.singleId && this.secretTitle) {
@@ -89,9 +100,13 @@ export class AppComponent {
     }
   }
 
+  // Sends editor content to pdf printer
+
   toPrinter($event: any) {
     this.docsService.sendToPrinter({"title": this.secretTitle, "content": this.secretContent});
   }
+
+  // Starts a new empty document
 
   clearForm($event: any): void {
     this.singleContent = "";
@@ -105,6 +120,8 @@ export class AppComponent {
     this.editor = "text";
     this.button = "Byt till kodeditor";
   }
+
+  // Switches between text and code editors
 
   changeEditor() {
     if (this.editor == "text") {

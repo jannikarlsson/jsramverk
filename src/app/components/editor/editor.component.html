@@ -9,6 +9,7 @@
         <!-- Kommentera -->
         <div class="comment-form" *ngIf="editor == 'text'">
         <h3 [ngClass]="{'hide': !singleId}">Kommentera</h3>
+        <p *ngIf="!commentText && singleId">Markera text för att kommentera</p>
         <p [ngClass]="{'hide': !commentText}">{{ commentText }}</p>
         <input type="text" formControlName="comment" id="comment" [ngClass]="{'hide': !commentText}">
         <button (click)="comment()" [ngClass]="{'hide': !singleId}">Ny kommentar</button>
