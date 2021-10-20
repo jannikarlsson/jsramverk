@@ -1,7 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { DocsService } from './docs.service';
 
 describe('DocsService', () => {
@@ -17,4 +15,7 @@ describe('DocsService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  
+
 });

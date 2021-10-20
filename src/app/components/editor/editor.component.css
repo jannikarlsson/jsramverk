@@ -71,3 +71,7 @@ button {
 button.exec {
     margin-top: 2em;
 }
+
+.highlighted {
+    background-color: gold;
+}

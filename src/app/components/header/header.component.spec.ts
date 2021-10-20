@@ -35,4 +35,10 @@ describe('HeaderComponent', () => {
     expect(onClickMock).toHaveBeenCalled();
   });
 
+  it('print button should trigger eventemitter', () => {
+    const onClickMock = spyOn(component, 'printButton');
+    fixture.debugElement.query(By.css('#print')).triggerEventHandler('click', null);
+    expect(onClickMock).toHaveBeenCalled();
+  });
+
 });

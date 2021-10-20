@@ -5,7 +5,7 @@
         <input type="text" id="title" value={{singleTitle}} formControlName="title" (input)="sendTitle()" required>
         <label>Innehåll:</label>
         <quill-editor *ngIf="editor == 'text'" [styles]="{'min-height': '120px', 'background-color': 'white'}" [(ngModel)]="singleContent"
-            [modules]="config" formControlName="editor" (keyup)="sendContent()"></quill-editor>
+            [modules]="config" formControlName="editor" (keyup)="sendContent()" (click)="removeYellow()" class="editor" id="textEditor"></quill-editor>
         <!-- Kommentera -->
         <div class="comment-form" *ngIf="editor == 'text'">
         <h3 [ngClass]="{'hide': !singleId}">Kommentera</h3>
@@ -26,7 +26,7 @@
     </div>
 </div>
 <!-- Code editor -->
-<div id="code" *ngIf="editor == 'code'">
+<div id="code" *ngIf="editor == 'code'" class="editor">
     <ngx-codemirror (keyup)="sendContent()" [(ngModel)]="singleContent" [options]="{
     lineNumbers: true,
     theme: 'material',

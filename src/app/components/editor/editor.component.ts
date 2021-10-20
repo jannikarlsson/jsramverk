@@ -34,6 +34,7 @@ export class EditorComponent implements OnInit {
   checkedUsers = [];
   commentText;
   content;
+  oldContent = {};
 
   config = {
     toolbar: [
@@ -54,6 +55,7 @@ export class EditorComponent implements OnInit {
       'comment': new FormControl(null)
     })
     this.singleTitle;
+    this.oldContent = {};
     this.socketService
       .getText()
       .subscribe((data) => {
@@ -78,6 +80,8 @@ export class EditorComponent implements OnInit {
       this.tempContent = this.singleContent;
     } else {
       this.tempContent = this.editorForm.get('editor').value;
+      this.tempContent = this.tempContent.replace('<span style="background-color: yellow;">', "");
+      this.tempContent = this.tempContent.replace('</span>', "");
     }
     this.saveEvent.emit(this.tempContent);
     console.log(this.tempContent)
@@ -87,7 +91,7 @@ export class EditorComponent implements OnInit {
         html: this.tempContent
       };
       this.socketService.sendText(data);
-      this.docsService.updateDoc(this.singleId, { title: this.singleTitle, content: this.tempContent }, this.token);
+      this.docsService.updateDoc(this.singleId, { title: this.singleTitle, content: this.tempContent, permissions: this.checkedUsers }, this.token);
     }
   }
 
@@ -140,14 +144,20 @@ export class EditorComponent implements OnInit {
   // Den här funktionen ska kunna highlighta en sträng i editorn, men den är inte klar
 
   highlight(text) {
-    console.log("highlighted " + text)
+    this.removeYellow();
     if (this.singleContent.includes(text)) {
-      console.log(true);
+      this.oldContent = {"id": this.singleId, "content": this.singleContent};
+      this.singleContent = this.singleContent.replace(text, `<span style="background-color: yellow;">${text}</span>`);
     } else {
       console.log(false);
     }
   }
 
+  removeYellow() {
+    this.singleContent = this.singleContent.replace('<span style="background-color: yellow;">', "");
+    this.singleContent = this.singleContent.replace('</span>', "");
+  }
+ 
   exec() {
     var data = {
       code: btoa(this.singleContent)
