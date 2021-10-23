@@ -27,7 +27,6 @@ export class EmailComponent implements OnInit {
 
   send() {
     let email = this.emailForm.get('email').value;
-    console.log({"email": email, "id": this.singleId, "title": this.singleTitle, "user": this.active})
     this.docsService.addPermission({"id": this.singleId, "email": email, "title": this.singleTitle, "sender": this.active}, this.token);
     this.inviteSent = "Inbjudan har skickats till " + email;
     this.emailForm.controls['email'].reset();

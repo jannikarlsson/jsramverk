@@ -11,9 +11,10 @@
 
 </ng-template>
 <ng-template #login>
+    <app-warning [msg]="msg"></app-warning>
     <div class="login-page">
         <div class="forms">
-            <app-login (tokenEvent)="receiveToken($event)"></app-login>
+            <app-login (tokenEvent)="receiveToken($event)" (msgEvent)="loginMsg($event)"></app-login>
             <app-register></app-register>
         </div>
     </div>

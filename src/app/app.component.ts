@@ -65,6 +65,10 @@ export class AppComponent {
     this.docsService.addComment(data, this.token);
   }
 
+  loginMsg(data: string) {
+    this.msg = data;
+  }
+
   // Opens a document
 
   openOne($event: any): void {

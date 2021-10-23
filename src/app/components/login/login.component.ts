@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   token: string;
 
   @Output() tokenEvent = new EventEmitter();
+  @Output() msgEvent = new EventEmitter();
 
   constructor(private authService: AuthService) { }
 
@@ -33,6 +34,10 @@ export class LoginComponent implements OnInit {
       .subscribe((data) => {
         this.token = data.data.token;
         this.tokenEvent.emit(data);
+        this.msgEvent.emit("");
+      }, (err) => {
+        this.msgEvent.emit(err.error.errors.detail);
+        console.log(err.error.errors.detail);
       })
   }
 

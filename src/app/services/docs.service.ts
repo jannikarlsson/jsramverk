@@ -11,10 +11,10 @@ export interface Docs {
 })
 export class DocsService {
   errorMessage;
-  // docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
-  // gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
-  docs = "http://localhost:1337/docs/"
-  gq = "http://localhost:1337/graphql"
+  docs = "https://jsramverk-editor-jaka19.azurewebsites.net/docs/"
+  gq = "https://jsramverk-editor-jaka19.azurewebsites.net/graphql"
+  // docs = "http://localhost:1337/docs/"
+  // gq = "http://localhost:1337/graphql"
 
   constructor(private http: HttpClient) { }
 

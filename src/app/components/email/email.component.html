@@ -1,8 +1,8 @@
-<div class="email" [ngClass]="{'hide': !singleId}">
+<div class="email" *ngIf="singleId">
     <p>Bjud in att redigera dokumentet</p>
     <form [formGroup]="emailForm" (ngSubmit)="send()">
         <input type="email" formControlName="email" required>
         <button [disabled]="!emailForm.valid">Send</button>
 </form>
-<p>{{ inviteSent }}</p>
+<p id="sent" *ngIf="inviteSent">{{ inviteSent }}</p>
 </div>

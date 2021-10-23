@@ -34,12 +34,12 @@ export class EditorComponent implements OnInit {
   checkedUsers = [];
   commentText;
   content;
-  oldContent = {};
+  // oldContent = {};
 
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
-      ['code-block'],
+      // ['code-block'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['link']
@@ -55,7 +55,7 @@ export class EditorComponent implements OnInit {
       'comment': new FormControl(null)
     })
     this.singleTitle;
-    this.oldContent = {};
+    // this.oldContent = {};
     this.socketService
       .getText()
       .subscribe((data) => {
@@ -145,12 +145,7 @@ export class EditorComponent implements OnInit {
 
   highlight(text) {
     this.removeYellow();
-    if (this.singleContent.includes(text)) {
-      this.oldContent = {"id": this.singleId, "content": this.singleContent};
-      this.singleContent = this.singleContent.replace(text, `<span style="background-color: yellow;">${text}</span>`);
-    } else {
-      console.log(false);
-    }
+    this.singleContent = this.singleContent.replace(text, `<span style="background-color: yellow;">${text}</span>`);
   }
 
   removeYellow() {
