@@ -26,6 +26,7 @@ export class AppComponent {
   token: string;
   filePermissions: Array<any>;
   update = 0;
+  commentText: string;
 
   constructor(private docsService: DocsService) {
   }
@@ -72,6 +73,7 @@ export class AppComponent {
   // Opens a document
 
   openOne($event: any): void {
+    this.commentText = "empty";
     this.docsService.fetchOneGQ($event, this.token)
       .subscribe((data) => {
         this.singleId = data["_id"];
@@ -123,6 +125,7 @@ export class AppComponent {
     this.filePermissions = [this.active];
     this.editor = "text";
     this.button = "Byt till kodeditor";
+    this.commentText = "empty";
   }
 
   // Switches between text and code editors

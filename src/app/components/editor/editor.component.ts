@@ -20,6 +20,7 @@ export class EditorComponent implements OnInit {
   @Input() active: string;
   @Input() editor: string;
   @Input() token: string;
+  @Input() commentText: string;
   @Input() filePermissions: Array<any>;
   @Output() saveEvent = new EventEmitter();
   @Output() saveTitle = new EventEmitter();
@@ -32,14 +33,11 @@ export class EditorComponent implements OnInit {
   allUsers = [];
   allUsersGQ = [];
   checkedUsers = [];
-  commentText;
   content;
-  // oldContent = {};
 
   config = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
-      // ['code-block'],
       [{ 'list': 'ordered' }, { 'list': 'bullet' }],
       [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
       ['link']
@@ -54,8 +52,11 @@ export class EditorComponent implements OnInit {
       'title': new FormControl(null),
       'comment': new FormControl(null)
     })
+    if (!this.singleComments) {
+      this.singleComments = [];
+    }
     this.singleTitle;
-    // this.oldContent = {};
+    this.commentText = "";
     this.socketService
       .getText()
       .subscribe((data) => {
@@ -84,7 +85,6 @@ export class EditorComponent implements OnInit {
       this.tempContent = this.tempContent.replace('</span>', "");
     }
     this.saveEvent.emit(this.tempContent);
-    console.log(this.tempContent)
     if (this.singleId) {
       let data = {
         _id: this.singleId,
@@ -96,7 +96,6 @@ export class EditorComponent implements OnInit {
   }
 
   // Checks box if user is in document permissions, only used for editor.component.html
-
   isPermitted(person) {
     if (this.filePermissions && this.filePermissions.includes(person)) {
       return true
@@ -106,14 +105,12 @@ export class EditorComponent implements OnInit {
   }
 
   // Emits title changes to app.js
-
   sendTitle() {
     this.editorTitle = this.editorForm.get('title').value;
     this.saveTitle.emit(this.editorTitle);
   }
 
   // Toggles user permission on check or uncheck, only used for editor.component.html
-
   check(value) {
     if (this.checkedUsers.includes(value)) {
       this.checkedUsers.splice(this.checkedUsers.indexOf(value), 1)
@@ -131,33 +128,31 @@ export class EditorComponent implements OnInit {
     this.editorForm.controls['comment'].reset()
   }
 
+  // Saves comment
   saveComment() {
     let commentData = { "id": this.singleId, "text": this.commentText, "comment": this.editorForm.get('comment').value, "user": this.active }
+    this.singleComments.push(commentData);
     this.commentEvent.emit(commentData);
     this.commentText = "";
-    this.docsService.fetchOneGQ(this.singleId, this.token)
-      .subscribe((data) => {
-        this.singleComments = data["comments"]
-      });
   }
 
-  // Den här funktionen ska kunna highlighta en sträng i editorn, men den är inte klar
-
+  // Highlights commented text in editor
   highlight(text) {
     this.removeYellow();
     this.singleContent = this.singleContent.replace(text, `<span style="background-color: yellow;">${text}</span>`);
   }
 
+  // Removes highlight from editor
   removeYellow() {
     this.singleContent = this.singleContent.replace('<span style="background-color: yellow;">', "");
     this.singleContent = this.singleContent.replace('</span>', "");
   }
- 
+
+  // Executes javascript from editor
   exec() {
     var data = {
       code: btoa(this.singleContent)
     };
-    console.log(data);
     this.docsService.executeCode(data);
   }
 }

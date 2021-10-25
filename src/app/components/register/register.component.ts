@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
   user: string;
   password: string;
   toggleClass: boolean = true;
+  registered: string;
 
   constructor(private authService: AuthService) { }
 
@@ -28,6 +29,7 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     console.log(this.registerForm.value)
     console.log(this.authService.register(this.registerForm.value))
+    this.registered = "Nu är du registrerad, logga in för att använda editorn.";
   }
 
   // Opens and closes accordion

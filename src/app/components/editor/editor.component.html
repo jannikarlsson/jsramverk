@@ -10,15 +10,15 @@
         <div class="comment-form" *ngIf="editor == 'text'">
         <h3 [ngClass]="{'hide': !singleId}">Kommentera</h3>
         <p *ngIf="!commentText && singleId">Markera text för att kommentera</p>
-        <p *ngIf="commentText">{{ commentText }}</p>
-        <input type="text" *ngIf="commentText" formControlName="comment" id="comment">
+        <p *ngIf="commentText && commentText !== 'empty'">{{ commentText }}</p>
+        <input type="text" *ngIf="commentText && commentText !== 'empty'" formControlName="comment" id="comment">
         <button *ngIf="singleId" id="newComment" (click)="comment()">Ny kommentar</button>
-        <button *ngIf="commentText" id="saveComment" (click)="saveComment()">Spara kommentar</button>
+        <button *ngIf="commentText && commentText !== 'empty'" id="saveComment" (click)="saveComment()">Spara kommentar</button>
     </div></div>
 </form>
 <!-- Kommentarer -->
-<div *ngIf="singleComments" class="comment-list">
-    <h3 *ngIf="singleComments && singleId">Kommentarer</h3>
+<div *ngIf="singleComments && singleComments.length" class="comment-list">
+    <h3 *ngIf="singleComments && singleId && singleComments.length">Kommentarer</h3>
     <div *ngFor="let item of singleComments" class="comment" (click)="highlight(item.text)">
         <p class="text">{{ item.text }}</p>
         <p class="content">{{ item.comment }}</p>

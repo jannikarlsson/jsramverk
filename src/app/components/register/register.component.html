@@ -1,4 +1,5 @@
 <div class="register">
+    <p *ngIf="registered">{{ registered }}<br><br></p>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-header">
             <h2 (click)="toggle()">Registrera ny användare</h2>
